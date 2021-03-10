@@ -43,7 +43,7 @@ const COFFEE_SECTION = "coffeescript.autocompile";
 class WSCoffeCompiler {
 	private isReloadingConfig = false;
 	private isDeactivating = false;
-	private readConfig(ws: string):Config {
+	private readConfig(ws: string): Config {
 		let config: Config;
 		if (this.isReloadingConfig) {
 			return config;
@@ -63,14 +63,14 @@ class WSCoffeCompiler {
 		return config;
 	}
 	public constructor() {
-	 this.initialize();
+		this.initialize();
 	}
-	public async initialize() {}
+	public async initialize() { }
 
-	public async onDidChangeConfiguration() {}
+	public async onDidChangeConfiguration() { }
 
-	public async onDidChangeWorkspaceFolders(added: ReadonlyArray<vscode.WorkspaceFolder>, removed?: ReadonlyArray<vscode.WorkspaceFolder>) {}
-	
+	public async onDidChangeWorkspaceFolders(added: ReadonlyArray<vscode.WorkspaceFolder>, removed?: ReadonlyArray<vscode.WorkspaceFolder>) { }
+
 	public async onDidSaveTextDocument(e: vscode.TextDocument) {
 		if (this.isDeactivating || this.isReloadingConfig) {
 			return;
@@ -154,7 +154,7 @@ class WSCoffeCompiler {
 				inlineMap: toBooleanValue(params.inlineMap, false),
 				sourceMap: toBooleanValue(params.sourceMap, false),
 			});
-			if(_.isString(result)) {
+			if (_.isString(result)) {
 				source = result.toString();
 			} else {
 				source = result.js;
@@ -168,7 +168,7 @@ class WSCoffeCompiler {
 					}
 				}
 			}
-			
+
 			let js = toStringValue(source);
 			if (toBooleanValue(params.compress, false)) {
 				js = uglifyJS.minify(js).code;
@@ -270,7 +270,7 @@ function getParams(textEditor: vscode.TextDocument) {
 	let sourceMap = toBooleanValue(getParam(paramString, 'sourcemap'));
 	let inlineMap = toBooleanValue(getParam(paramString, 'inlinemap'));
 	let header = toBooleanValue(getParam(paramString, 'header'));
-	return {output, bare, compress, sourceMap, inlineMap, header};
+	return { output, bare, compress, sourceMap, inlineMap, header };
 }
 
 function replacePlaceholders(outPath: string, textEditor: vscode.TextDocument): string {
@@ -320,7 +320,7 @@ function toStringValue(val: any, defaultVal = ''): string {
 	return '' + val;
 }
 
-function fixPath(path:string):string {
+function fixPath(path: string): string {
 	return toStringValue(path).split(Path.sep).join('/');
 }
 
