@@ -2,7 +2,8 @@
   "name": "vscode-coffee-autocompile",
   "displayName": "Coffee Autocompile",
   "description": "Auto-compiles CoffeeScript files on save",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "publisher": "satiromarra",
   "engines": {
     "vscode": "^1.54.0"
   },
