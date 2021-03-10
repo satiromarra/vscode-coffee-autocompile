@@ -53,7 +53,7 @@ class WSCoffeCompiler {
 			ws,
 			'.vscode',
 			'settings.json'
-		))
+		));
 		try {
 			config = vscode.workspace.getConfiguration(COFFEE_SECTION, resource) || <any>{};
 		}
@@ -147,19 +147,17 @@ class WSCoffeCompiler {
 				)
 			);
 			const SOURCE_MAP_FILE_NAME = Path.basename(SOURCE_MAP_FILE);
-			let result: string | CompilerResult = CoffeeScript.compile(e.getText(), {
+			let source: string;
+			let result: CompilerResult = CoffeeScript.compile(e.getText(), {
 				bare: toBooleanValue(params.bare, true),
 				header: toBooleanValue(params.header, false),
 				inlineMap: toBooleanValue(params.inlineMap, false),
 				sourceMap: toBooleanValue(params.sourceMap, false),
 			});
-
-			if (_.isString(result)) {
-				result = {
-					js: result,
-				};
-			}
-			else {
+			if(_.isString(result)) {
+				source = result.toString();
+			} else {
+				source = result.js;
 				if (result.sourceMap) {
 					const GENERATED_MAP = result.sourceMap.generate({
 						generatedFile: OUT_FILE_NAME,
@@ -170,7 +168,8 @@ class WSCoffeCompiler {
 					}
 				}
 			}
-			let js = toStringValue(result.js);
+			
+			let js = toStringValue(source);
 			if (toBooleanValue(params.compress, false)) {
 				js = uglifyJS.minify(js).code;
 			}
@@ -232,11 +231,13 @@ function showView(type: string, message: string): void {
 
 async function writeFile(filePath: string, content: string) {
 	FSExtra.mkdirp(Path.dirname(filePath), async (error) => {
-		if (error)
+		if (error) {
 			return showView('error', error.message);
+		}
 		FSExtra.writeFile(filePath, content, error => {
-			if (error)
+			if (error) {
 				return showView('error', error.message);
+			}
 			showView('success', `Compiled coffee script to ${getPathInWorkspaces(filePath)}`);
 		});
 	});
@@ -245,7 +246,9 @@ async function writeFile(filePath: string, content: string) {
 function getPathInWorkspaces(filePath: string): string {
 	let projectPath = Path.dirname(filePath);
 	for (let p of vscode.workspace.workspaceFolders) {
-		if (filePath.match(p.uri.path)) projectPath = p.uri.path;
+		if (filePath.match(p.uri.path)) {
+			projectPath = p.uri.path;
+		}
 	}
 	let regex = new RegExp(`^${projectPath}(/|\\\\)?`);
 	return filePath.replace(regex, '');
@@ -253,9 +256,13 @@ function getPathInWorkspaces(filePath: string): string {
 
 function getParams(textEditor: vscode.TextDocument) {
 	let fline = textEditor.lineAt(0).text;
-	if (fline.match(/^#!/)) fline = textEditor.lineAt(1).text;
+	if (fline.match(/^#!/)) {
+		fline = textEditor.lineAt(1).text;
+	}
 	let [, paramString] = fline.match(/\s*#\s*(.*)/) || [];
-	if (!paramString) return {};
+	if (!paramString) {
+		return {};
+	}
 	paramString = paramString.trim();
 	let output = replacePlaceholders(getParam(paramString, 'out'), textEditor);
 	let bare = toBooleanValue(getParam(paramString, 'bare'));
@@ -281,7 +288,7 @@ function getParam(paramString: string, key: string): string {
 
 function toBooleanValue(val: any, defaultVal = false): boolean {
 	if (_.isString(val)) {
-		val = val == 'true';
+		val = val === 'true';
 	}
 	if (_.isBoolean(val)) {
 		return val;
@@ -320,7 +327,9 @@ function fixPath(path:string):string {
 function rootPath(d: string) {
 	let projectPath = Path.dirname(d);
 	for (let p of vscode.workspace.workspaceFolders) {
-		if (d.trim().startsWith(p.uri.path)) projectPath = p.uri.path;
+		if (d.trim().startsWith(p.uri.path)) {
+			projectPath = p.uri.path;
+		}
 	}
 	return Path.resolve(projectPath);
 }
