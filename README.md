@@ -9,8 +9,6 @@
    * [Settings](#settings-)
    * [Settings in file](#settings-in-file-)
 3. [Support and contribute](#support-and-contribute-)
-4. [Related projects](#related-projects-)
-   * [vscode-helpers](#vscode-helpers-)
 
 ## Install [[&uarr;](#table-of-contents)]
 
@@ -81,9 +79,3 @@ To work with the code:
 * now you can edit and debug there
 * commit your changes to your new branch and sync it with your forked GitHub repo
 * make a [pull request](https://github.com/satiromarra/vscode-coffee-autocompile/pulls)
-
-## Related projects [[&uarr;](#table-of-contents)]
-
-### vscode-helpers [[&uarr;](#related-projects-)]
-
-[vscode-helpers](https://github.com/satiromarra/vscode-helpers) is a NPM module, which you can use in your own [VSCode extension](https://code.visualstudio.com/docs/extensions/overview) and contains a lot of helpful classes and functions.
