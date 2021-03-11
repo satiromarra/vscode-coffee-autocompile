@@ -22,9 +22,12 @@
   "main": "./out/extension",
   "contributes": {
     "configuration": {
+      "type": "object",
+      "title": "Coffee Autocompile Configuration",
       "properties": {
         "coffeescript.autocompile": {
           "type": "object",
+          "description": "Configuration options for Coffee Autocompile",
           "scope": "resource",
           "properties": {
             "bare": {

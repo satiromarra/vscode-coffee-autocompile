@@ -4,11 +4,11 @@
 
 ## Table of contents
 
-1. [Install](#install-)
-2. [How to use](#how-to-use-)
-   * [Settings](#settings-)
-   * [Settings in file](#settings-in-file-)
-3. [Support and contribute](#support-and-contribute-)
+1. [Install](#install)
+2. [How to use](#how-to-use)
+   * [Settings](#settings)
+   * [Settings in file](#settings-in-file)
+3. [Support and contribute](#support-and-contribute)
 
 ## Install [[&uarr;](#table-of-contents)]
 
