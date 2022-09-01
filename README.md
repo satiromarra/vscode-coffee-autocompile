@@ -2,6 +2,8 @@
 
 [Visual Studio Code](https://code.visualstudio.com) extension, which compiles [CoffeeScript](http://coffeescript.org/) files on save.
 
+[![VS Marketplace Version](https://vsmarketplacebadge.apphb.com/version-short/satiromarra.vscode-coffee-autocompile.svg)](https://marketplace.visualstudio.com/items?itemName=satiromarra.vscode-coffee-autocompile)
+
 ## Table of contents
 
 1. [Install](#install)
